@@ -6,8 +6,6 @@ settings:
 
 importers:
 
-  .: {}
-
   demo:
     dependencies:
       '@astrojs/tailwind':
