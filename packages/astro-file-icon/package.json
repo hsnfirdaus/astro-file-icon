@@ -10,6 +10,18 @@
     "src",
     "index.ts"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muhammad Hasan Firdaus",
+    "email": "hasanteam008@gmail.com",
+    "url": "https://github.com/hsnfirdaus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hsnfirdaus/astro-file-icon"
+  },
   "keywords": [
     "astro-component",
     "withastro",
