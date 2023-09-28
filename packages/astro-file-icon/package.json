@@ -1,5 +1,6 @@
 {
   "name": "astro-file-icon",
+  "description": "Astro component that makes it easy to render themeable svg file icons.",
   "version": "0.3.0",
   "type": "module",
   "exports": {
