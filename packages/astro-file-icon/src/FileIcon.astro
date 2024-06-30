@@ -1,13 +1,10 @@
 ---
 import { colord, extend as extendColord } from "colord";
 import namesPlugin from "colord/plugins/names";
-import uniqueId from "lodash.uniqueid";
 import Glyphs from "./Glyphs.astro";
+import type { IconType } from "./icon.type";
 
 extendColord([namesPlugin]);
-
-// prettier-ignore
-type IconType = "3d" | "acrobat" | "audio" | "binary" | "code" | "code2" | "compressed" | "document" | "drive" | "font" | "image" | "presentation" | "settings" | "spreadsheet" | "vector" | "video";
 
 export interface BaseIconProps {
   /** Color of icon background */
@@ -36,7 +33,7 @@ export interface BaseIconProps {
   type?: IconType;
 }
 
-export type Props = Partial<BaseIconProps & astroHTML.JSX.SVGAttributes>;
+export type Props = BaseIconProps & astroHTML.JSX.SVGAttributes;
 
 const VIEWBOX = {
   WIDTH: 40,
@@ -55,6 +52,11 @@ const FOLD = {
 
 const LABEL_HEIGHT = 14;
 
+const useId = (() => {
+  let i = 0;
+  return () => i++;
+})();
+
 const {
   color = "whitesmoke",
   extension,
@@ -71,12 +73,14 @@ const {
   ...rest
 } = Astro.props;
 
-const UNIQUE_ID = uniqueId();
+const UNIQUE_ID = useId();
 ---
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox={`0 0 ${VIEWBOX.WIDTH} ${VIEWBOX.HEIGHT}`}
+  width="100%"
+  style={{ maxWidth: "100%" }}
   {...rest}
 >
   <defs>
@@ -90,7 +94,7 @@ const UNIQUE_ID = uniqueId();
         height={ICON.HEIGHT}></rect>
     </clipPath>
 
-    <clipPath id="foldCrop">
+    <clipPath id={`foldCrop${UNIQUE_ID}`}>
       <rect
         width={ICON.WIDTH}
         height={FOLD.HEIGHT}
@@ -156,7 +160,7 @@ const UNIQUE_ID = uniqueId();
           fill={foldColor || colord(color).darken(0.1).toHex()}
           rx={radius}
           ry={radius}
-          clip-path="url(#foldCrop)"
+          clip-path={`url(#foldCrop${UNIQUE_ID})`}
         />
       </g>
     )
@@ -165,7 +169,7 @@ const UNIQUE_ID = uniqueId();
   {
     extension && (
       <Fragment>
-        <g id="label">
+        <g id={`label${UNIQUE_ID}`}>
           <rect
             fill={labelColor || colord(color).darken(0.3).toHex()}
             x={ICON.X_OFFSET}
@@ -175,7 +179,10 @@ const UNIQUE_ID = uniqueId();
             clip-path={`url(#pageRadius${UNIQUE_ID})`}
           />
         </g>
-        <g id="labelText" transform={`translate(${ICON.X_OFFSET} 34)`}>
+        <g
+          id={`labelText${UNIQUE_ID}`}
+          transform={`translate(${ICON.X_OFFSET} 34)`}
+        >
           <text
             x={ICON.WIDTH / 2}
             y="10"

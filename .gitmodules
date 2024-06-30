@@ -1,0 +1,3 @@
+[submodule "scripts/react-file-icon"]
+	path = scripts/react-file-icon
+	url = https://github.com/corygibbons/react-file-icon

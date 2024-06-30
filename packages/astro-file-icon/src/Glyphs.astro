@@ -1,64 +1,11 @@
 ---
-import type { IconType } from "./FileIcon.astro";
-import Glyph3D from "./glyphs/3d.astro";
-import Acrobat from "./glyphs/Acrobat.astro";
-import Audio from "./glyphs/Audio.astro";
-import Binary from "./glyphs/Binary.astro";
-import Code from "./glyphs/Code.astro";
-import Code2 from "./glyphs/Code2.astro";
-import Compressed from "./glyphs/Compressed.astro";
-import Document from "./glyphs/Document.astro";
-import Drive from "./glyphs/Drive.astro";
-import Font from "./glyphs/Font.astro";
-import Image from "./glyphs/Image.astro";
-import Presentation from "./glyphs/Presentation.astro";
-import Settings from "./glyphs/Settings.astro";
-import Spreadsheet from "./glyphs/Spreadsheet.astro";
-import Vector from "./glyphs/Vector.astro";
-import Video from "./glyphs/Video.astro";
+import type { IconType } from "./icon.type";
 
 interface Props {
   type: IconType;
 }
 const { type } = Astro.props;
+const { default: innerHTML } = await import(`./glyphs/${type}.svg?raw`);
 ---
 
-<Fragment>
-  {
-    type === "3d" ? (
-      <Glyph3D />
-    ) : type === "acrobat" ? (
-      <Acrobat />
-    ) : type === "audio" ? (
-      <Audio />
-    ) : type === "binary" ? (
-      <Binary />
-    ) : type === "code" ? (
-      <Code />
-    ) : type === "code2" ? (
-      <Code2 />
-    ) : type === "compressed" ? (
-      <Compressed />
-    ) : type === "document" ? (
-      <Document />
-    ) : type === "drive" ? (
-      <Drive />
-    ) : type === "font" ? (
-      <Font />
-    ) : type === "image" ? (
-      <Image />
-    ) : type === "presentation" ? (
-      <Presentation />
-    ) : type === "settings" ? (
-      <Settings />
-    ) : type === "spreadsheet" ? (
-      <Spreadsheet />
-    ) : type === "vector" ? (
-      <Vector />
-    ) : type === "video" ? (
-      <Video />
-    ) : (
-      <Fragment />
-    )
-  }
-</Fragment>
+<Fragment set:html={innerHTML} />

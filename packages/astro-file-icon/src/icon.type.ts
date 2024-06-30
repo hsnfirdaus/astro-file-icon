@@ -1,0 +1,18 @@
+export type IconType =
+  | "3d"
+  | "acrobat"
+  | "android"
+  | "audio"
+  | "binary"
+  | "code"
+  | "code2"
+  | "compressed"
+  | "document"
+  | "drive"
+  | "font"
+  | "image"
+  | "presentation"
+  | "settings"
+  | "spreadsheet"
+  | "vector"
+  | "video";
