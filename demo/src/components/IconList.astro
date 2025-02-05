@@ -2,7 +2,7 @@
 import { FileIcon, defaultStyles, type StylesItem } from "astro-file-icon";
 ---
 
-<div class="grid grid-cols-12 gap-8">
+<div class="grid grid-cols-4 md:grid-cols-8 xl:grid-cols-12 gap-8">
   {
     (Object.keys(defaultStyles) as StylesItem[]).map((item) => (
       <FileIcon extension={item} {...defaultStyles[item]} />
